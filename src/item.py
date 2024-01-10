@@ -1,5 +1,4 @@
 import csv
-import pd
 
 class Item:
     """
@@ -19,6 +18,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -46,16 +46,11 @@ class Item:
             self.__name = new_name
         return 0
 
-    def instantiate_from_csv(self, csv_file_name):
-        data = pd.read_csv(csv_file_name, skiprows=1, sep=';', index_col=False,
-                           names=["CSV_Item1", "CSV_Item2", "CSV_Item3", "CSV_Item4", 'CSV_Item5'])
-        for _, row in data.iterrows():
-            self.csvitem1 = row['CSV_Item1']
-            self.csvitem2 = row['CSV_Item2']
-            self.csvitem3 = row['CSV_Item3']
-            self.csvitem4 = row['CSV_Item4']
-            self.csvitem5 = row['CSV_Item5']
-        return 0
+    def instantiate_from_csv(self, csvfile):
+        with open(csvfile, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                print(row['first_name'], row['last_name'])
 
     def string_to_number(self, param):
         return int(param)
