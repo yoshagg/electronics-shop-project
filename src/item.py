@@ -47,6 +47,7 @@ class Item:
         return 0
 
     def instantiate_from_csv(self, csvfile):
+        Item.all = []
         with open(csvfile, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
