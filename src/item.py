@@ -58,7 +58,7 @@ class Item:
         with open(csvfile, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                print(row['name'], row['price'], row['quantity'])
+                Item.all.append(Item(row['name'], row['price'], row['quantity']))
         return 0
 
     def string_to_number(self, param):
