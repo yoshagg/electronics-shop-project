@@ -20,7 +20,7 @@ class Phone(Item):
     @number_of_sim.setter
     def number_of_sim(self, param):
         if param < 1 or param > 2:
-            raise Exception
+            print('ValueError: Количество физических SIM-карт должно быть целым числом больше нуля.')
         else:
             self._number_of_sim = param
 
