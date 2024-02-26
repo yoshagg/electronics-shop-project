@@ -17,3 +17,7 @@ def test_str(object):
 def test_number_of_sim(object):
     assert object.number_of_sim == 2
 
+def test_setter_number_of_sim(object):
+    object.number_of_sim = 1
+    assert object.number_of_sim == 1
+

@@ -1,6 +1,11 @@
 from src.item import Item
+from src.phone import Phone
 import pytest
 
+
+@pytest.fixture()
+def phone_object():
+    return Phone("phone_object", 228, 1, 2)
 
 @pytest.fixture()
 def object():
@@ -9,6 +14,10 @@ def object():
 
 def test_repr(object):
     assert repr(object) == '''Item('object', 228, 1)'''
+
+
+def test_add(object, phone_object):
+    assert object + phone_object == 2
 
 
 def test_item_calculate_total_price(object):

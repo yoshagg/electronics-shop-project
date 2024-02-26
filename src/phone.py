@@ -10,12 +10,6 @@ class Phone(Item):
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
 
-    def __add__(self, other):
-        if isinstance(other, Item) or isinstance(other, Phone):
-            return self.quantity + other.quantity
-        else:
-            print('Складывать можно только Phone и Item')
-
     def __str__(self):
         return f'{self.name}'
 
