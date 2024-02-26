@@ -1,4 +1,5 @@
 import csv
+from exceptions.InstantiateCSVError import InstantiateCSVError
 
 
 class Item:
@@ -25,7 +26,10 @@ class Item:
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def __add__(self, other):
-        return self.quantity + other.quantity
+        if issubclass(other.__class__, Item):
+            return self.quantity + other.quantity
+        else:
+            print('Складывать можно только Phone и Item')
 
     def __str__(self):
         return f'{self.name}'
@@ -59,10 +63,15 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, csvfile):
         cls.all.clear()
-        with open(csvfile, encoding="windows-1251") as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row['name'], row['price'], row['quantity'])
+        try:
+            with open(csvfile, encoding="windows-1251") as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls(row['name'], row['price'], row['quantity'])
+        except FileNotFoundError:
+            print("Файл items.csv не найден")
+
+
 
     @staticmethod
     def string_to_number(param):
