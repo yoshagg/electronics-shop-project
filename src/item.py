@@ -61,7 +61,7 @@ class Item:
         return 0
 
     @classmethod
-    def instantiate_from_csv(cls, csvfile):
+    def instantiate_from_csv(cls, csvfile='../src/items.csv'):
         cls.all.clear()
         try:
             with open(csvfile, encoding="windows-1251") as csvfile:
@@ -69,7 +69,9 @@ class Item:
                 for row in reader:
                     cls(row['name'], row['price'], row['quantity'])
         except FileNotFoundError:
-            print("Файл items.csv не найден")
+            print("FileNotFoundError: Файл items.csv не найден")
+        except KeyError:
+            raise InstantiateCSVError
 
 
 
