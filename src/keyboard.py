@@ -11,8 +11,6 @@ class Keyboard(Item):
             self.__language = "EN"
         elif self.__language == "EN":
             self.__language = "RU"
-        else:
-            print('''AttributeError: property 'language' of 'Keyboard' object has no setter''')
 
     @property
     def language(self):
